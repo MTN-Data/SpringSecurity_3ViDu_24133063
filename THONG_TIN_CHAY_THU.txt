@@ -1,0 +1,33 @@
+KẾT QUẢ KIỂM TRA - 29/09/2026
+
+Môi trường: OpenJDK 17, Maven 3.9.11, Spring Boot 4.1.1.
+Cấu hình pom: Java 17 (có thể build/run bằng JDK 21 hoặc 26).
+Test dùng H2 in-memory, profile test; không kết nối SQL Server của người dùng.
+
+Ví dụ 1: {'tests': 7, 'failures': 0, 'errors': 0, 'skipped': 0}
+Ví dụ 2: {'tests': 8, 'failures': 0, 'errors': 0, 'skipped': 0}
+Ví dụ 3: {'tests': 15, 'failures': 0, 'errors': 0, 'skipped': 0}
+
+Tổng cộng: 30 tests, 0 failures, 0 errors, 0 skipped.
+Maven test: BUILD SUCCESS cho cả 3 project.
+Maven package: BUILD SUCCESS, tạo được 3 executable JAR.
+
+Kiểm tra khởi động JAR + HTTP thật (H2):
+Ví dụ 1: khởi động PASS; đăng nhập ADMIN PASS; dashboard HTTP 200 và hiển thị tên PASS.
+Ví dụ 2: khởi động PASS; đăng nhập ADMIN PASS; dashboard HTTP 200 và hiển thị tên PASS.
+Ví dụ 3: khởi động PASS; đăng nhập ADMIN PASS; dashboard HTTP 200 và hiển thị tên PASS.
+
+Chức năng được kiểm tra: login email/username, sai password, CSRF, session/logout,
+phân quyền ADMIN/USER, render các template, đăng ký HTTP và kích hoạt OTP,
+mã OTP dùng một lần, giới hạn số lần thử, mật khẩu reset, CRUD User/Product,
+quyền sở hữu sản phẩm, tìm kiếm mô tả, cấu hình kích thước phân trang, MapStruct.
+
+Các thay đổi: SQL Server 14330/sa; profile mặc định sqlserver; seed dữ liệu;
+không nhận ID từ form tạo Product; giữ ID form User khi validation lỗi;
+tìm kiếm tên hoặc mô tả sản phẩm; hỗ trợ Unicode SQL Server;
+thêm test tích hợp, Maven Wrapper, script database, hướng dẫn STS.
+
+CHƯA KIỂM TRA TRỰC TIẾP: SQL Server trên máy bạn, STS trên máy bạn,
+gửi email SMTP thật và upload Cloudinary thật (chưa có thông tin kết nối).
+OTP mặc định là demo; phải bật MAIL_ENABLED và tắt DEMO_SHOW_OTP để gửi thật.
+Xem HUONG_DAN_STS.md để hoàn thành cấu hình cá nhân và kiểm tra trước khi nộp.

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="vi" layout:decorate="~{layouts/base}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
+ <head>
+  <title>
+   Quản trị
+  </title>
+ </head>
+ <body>
+  <main class="container" layout:fragment="content">
+   <div class="page-heading">
+    <div>
+     <span class="eyebrow">
+      DÀNH RIÊNG CHO ADMIN
+     </span>
+     <h1>
+      Khu vực quản trị
+     </h1>
+     <p class="muted">
+      Trang được bảo vệ bằng hasRole(ADMIN).
+     </p>
+    </div>
+   </div>
+   <div class="card">
+    <div class="card-icon">
+     ♛
+    </div>
+    <h3>
+     Tài khoản đã tạo
+    </h3>
+    <div class="card-value" th:text="${userCount}">
+     0
+    </div>
+   </div>
+  </main>
+ </body>
+</html>
+

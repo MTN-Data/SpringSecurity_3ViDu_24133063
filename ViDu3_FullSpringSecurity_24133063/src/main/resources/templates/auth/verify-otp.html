@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Xác minh email • UTEShop</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body class="auth-page">
+    <aside class="auth-showcase">
+        <a class="brand" th:href="@{/}">
+            <span class="brand-mark">✦</span>
+            UTEShop
+        </a>
+        <div class="showcase-body">
+            <span class="eyebrow">SPRING SECURITY · XÁC THỰC AN TOÀN</span>
+            <h1>Đơn giản hơn.<br><em>An toàn hơn.</em></h1>
+            <p>Kiểm soát tài khoản và sản phẩm trong cùng một không gian trực quan, kết nối và hiện đại.</p>
+        </div>
+        <div class="showcase-quote">
+            <span class="sparkle">✧</span>
+            Secure by design · Built with care
+        </div>
+    </aside>
+    <section class="auth-side">
+        <div class="auth-box">
+            <span class="eyebrow">TÀI KHOẢN UTESHOP</span>
+            <h2>Xác minh email</h2>
+            <p class="lead">Nhập mã 6 chữ số gửi đến địa chỉ email đã đăng ký.</p>
+            <div class="alert alert-success" th:if="${success}" th:text="${success}"></div>
+            <div class="alert alert-error" th:if="${error}" th:text="${error}"></div>
+            <div class="alert alert-info" th:if="${demoOtp}">
+                Chế độ thực hành – OTP của bạn:
+                <strong th:text="${demoOtp}">000000</strong>
+            </div>
+
+            <form method="post" th:action="@{/verify-otp}" th:object="${verifyOtpDTO}">
+                <div class="alert alert-error" th:if="${#fields.hasGlobalErrors()}"
+                     th:each="item : ${#fields.globalErrors()}" th:text="${item}"></div>
+                <div class="form-group">
+                    <label for="email">Email nhận OTP</label>
+                    <input id="email" type="email" class="form-control" th:field="*{email}" readonly>
+                    <small class="error-text" th:errors="*{email}"></small>
+                </div>
+                <div class="form-group">
+                    <label for="otp">Mã xác minh</label>
+                    <input id="otp" class="form-control" th:field="*{otp}" inputmode="numeric"
+                           pattern="[0-9]{6}" maxlength="6" autocomplete="one-time-code"
+                           placeholder="000000" required autofocus>
+                    <small class="error-text" th:errors="*{otp}"></small>
+                </div>
+                <button class="btn btn-primary btn-block" type="submit">Xác minh tài khoản</button>
+            </form>
+            <form method="post" th:action="@{/register/resend-otp}" style="margin-top:14px;">
+                <input type="hidden" name="email" th:value="${verifyOtpDTO.email}">
+                <button class="btn btn-outline btn-block" type="submit">Gửi lại mã OTP</button>
+            </form>
+            <p class="muted" style="font-size:12px;margin-top:15px;">
+                Mã hết hạn sau 5 phút; tối đa 5 lần nhập sai. Gửi lại sau 60 giây.
+            </p>
+
+            <p class="auth-bottom">
+                <a th:href="@{/login}">← Quay lại đăng nhập</a>
+            </p>
+        </div>
+    </section>
+</body>
+</html>

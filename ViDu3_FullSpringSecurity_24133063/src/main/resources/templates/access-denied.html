@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/base}">
+<head><title>Không có quyền truy cập</title></head>
+<body><main layout:fragment="content" class="container">
+    <div class="panel" style="max-width:650px;margin:80px auto;text-align:center;padding:70px 35px;">
+        <div style="font-size:65px;">🔒</div>
+        <h1>403 · Không có quyền</h1>
+        <p class="muted">Tài khoản của bạn không được phép xem nội dung này.</p>
+        <a class="btn btn-primary" th:href="@{/dashboard}">Trở về tổng quan</a>
+    </div>
+</main></body></html>

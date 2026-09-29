@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+ <head th:replace="~{layouts/base :: head('Bảng điều khiển')}">
+ </head>
+ <body>
+  <div th:replace="~{fragments/header :: header}">
+  </div>
+  <main class="container">
+   <div class="page-heading">
+    <div>
+     <span class="section-label">
+      KHÔNG GIAN CỦA BẠN
+     </span>
+     <h1>
+      Xin chào,
+      <span th:text="${currentUser.fullName}">
+       Bạn
+      </span>
+      👋
+     </h1>
+     <p class="muted">
+      Bạn đã đăng nhập thành công qua email.
+     </p>
+    </div>
+    <a class="btn btn-outline" th:href="@{/}">
+     ← Trang chủ
+    </a>
+   </div>
+   <div class="grid">
+    <article class="card">
+     <div class="card-icon">
+      ✉
+     </div>
+     <h3>
+      Email
+     </h3>
+     <p th:text="${currentUser.email}">
+      email
+     </p>
+    </article>
+    <article class="card">
+     <div class="card-icon mint">
+      ◈
+     </div>
+     <h3>
+      Vai trò
+     </h3>
+     <span class="pill" th:text="${currentUser.roleName}">
+      USER
+     </span>
+    </article>
+    <article class="card">
+     <div class="card-icon peach">
+      ✦
+     </div>
+     <h3>
+      Tình trạng
+     </h3>
+     <span class="pill">
+      Đang hoạt động
+     </span>
+     <p>
+      <a class="text-link" th:href="@{/admin}" th:if="${currentUser.roleName == 'ADMIN'}">
+       Xem quản trị →
+      </a>
+     </p>
+    </article>
+   </div>
+  </main>
+  <footer class="footer">
+   © 2026 UTEShop
+  </footer>
+ </body>
+</html>
+

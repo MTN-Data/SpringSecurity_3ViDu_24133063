@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Đăng nhập • UTEShop</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body class="auth-page">
+    <aside class="auth-showcase">
+        <a class="brand" th:href="@{/}"><span class="brand-mark">✦</span> UTEShop</a>
+        <div class="showcase-body">
+            <span class="eyebrow">SPRING BOOT 4 · SECURITY 7 / VÍ DỤ 03</span>
+            <h1>Một trải nghiệm<br><em>đăng nhập mới.</em></h1>
+            <p>Không gian quản lý hiện đại, bảo mật với Spring Security và thiết kế chỉn chu cho mọi màn hình.</p>
+        </div>
+        <div class="showcase-quote"><span class="sparkle">✧</span> Secure by design · Built with care</div>
+    </aside>
+    <section class="auth-side">
+        <div class="auth-box">
+            <div class="eyebrow">CHÀO MỪNG TRỞ LẠI</div>
+            <h2>Đăng nhập</h2>
+            <p class="lead">Nhập thông tin tài khoản để tiếp tục.</p>
+            <div class="alert alert-error" th:if="${param.error}">Thông tin đăng nhập không chính xác hoặc tài khoản bị khóa.</div>
+            <div class="alert alert-success" th:if="${param.logout}">Bạn đã đăng xuất thành công.</div>
+            <div class="alert alert-success" th:if="${success}" th:text="${success}"></div>
+            <form method="post" th:action="@{/login}">
+                <div class="form-group">
+                    <label for="login">Username hoặc email</label>
+                    <input id="login" class="form-control" name="login" type="text" placeholder="username / email@example.com" autocomplete="username" required autofocus>
+                </div>
+                <div class="form-group">
+                    <label for="password">Mật khẩu</label>
+                    <input id="password" class="form-control" name="password" type="password" placeholder="••••••••" autocomplete="current-password" required>
+                </div>
+                <div class="form-note">
+                    <span class="muted">Bảo vệ bởi Spring Security</span>
+                    <a th:href="@{/forgot-password}">Quên mật khẩu?</a>
+                </div>
+                <button class="btn btn-primary btn-block" type="submit">Đăng nhập ↗</button>
+            </form>
+            <p class="auth-bottom"><a th:href="@{/register}">Chưa có tài khoản? Đăng ký ngay →</a></p>
+        </div>
+    </section>
+</body>
+</html>

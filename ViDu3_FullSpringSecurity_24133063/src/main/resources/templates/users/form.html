@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/base}">
+<head>
+    <title>Biểu mẫu người dùng</title>
+</head>
+<body>
+<main layout:fragment="content" class="container">
+    <div class="page-heading" style="max-width:800px;margin:15px auto 30px;">
+        <div>
+            <span class="section-label">ADMIN / NGƯỜI DÙNG</span>
+            <h1 th:text="${editing} ? 'Chỉnh sửa thành viên' : 'Tạo tài khoản mới'">Người dùng</h1>
+            <p class="muted">Cập nhật thông tin, vai trò và trạng thái truy cập.</p>
+        </div>
+        <a class="btn btn-outline" th:href="@{/users}">← Danh sách</a>
+    </div>
+    <div class="panel form-panel">
+        <form th:action="${editing} ? @{/users/edit/{id}(id=${userForm.id})} : @{/users/create}"
+              th:object="${userForm}" method="post">
+            <div class="alert alert-error" th:if="${#fields.hasGlobalErrors()}"
+                 th:each="item : ${#fields.globalErrors()}" th:text="${item}"></div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Họ và tên</label>
+                    <input class="form-control" th:field="*{fullName}" required>
+                    <small class="error-text" th:errors="*{fullName}"></small>
+                </div>
+                <div class="form-group">
+                    <label>Username</label>
+                    <input class="form-control" th:field="*{username}" required>
+                    <small class="error-text" th:errors="*{username}"></small>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input class="form-control" th:field="*{email}" type="email" required>
+                    <small class="error-text" th:errors="*{email}"></small>
+                </div>
+                <div class="form-group">
+                    <label>Vai trò</label>
+                    <select class="form-control" th:field="*{roleName}">
+                        <option value="ROLE_USER">USER</option>
+                        <option value="ROLE_ADMIN">ADMIN</option>
+                    </select>
+                </div>
+                <div class="form-group span-2">
+                    <label>URL ảnh đại diện (không bắt buộc)</label>
+                    <input class="form-control" th:field="*{images}" placeholder="https://...">
+                </div>
+                <div class="form-group span-2">
+                    <label th:text="${editing} ? 'Đổi mật khẩu (để trống nếu giữ nguyên)' : 'Mật khẩu (ít nhất 8 ký tự)'">Mật khẩu</label>
+                    <input class="form-control" type="password" th:field="*{password}"
+                           autocomplete="new-password" placeholder="••••••••">
+                    <small class="error-text" th:errors="*{password}"></small>
+                </div>
+                <div class="form-group span-2">
+                    <label style="display:flex;align-items:center;gap:10px;">
+                        <input type="checkbox" th:field="*{enabled}">
+                        Cho phép đăng nhập
+                    </label>
+                </div>
+            </div>
+            <button class="btn btn-primary" type="submit">Lưu thông tin ↗</button>
+            <a class="btn btn-outline" th:href="@{/users}">Hủy</a>
+        </form>
+    </div>
+</main>
+</body>
+</html>

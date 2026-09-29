@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/base}">
+<head>
+    <title>Bảng điều khiển</title>
+</head>
+<body>
+<main layout:fragment="content" class="container">
+    <div class="page-heading">
+        <div>
+            <span class="section-label">BẢNG ĐIỀU KHIỂN CÁ NHÂN</span>
+            <h1>Chào mừng, <span th:text="${currentUser.fullName}">Bạn</span> ✦</h1>
+            <p class="muted">Theo dõi dữ liệu và quản lý công việc chỉ với vài thao tác.</p>
+        </div>
+        <a class="btn btn-primary" th:href="@{/products/create}">+ Thêm sản phẩm</a>
+    </div>
+    <section class="grid">
+        <article class="card">
+            <div class="card-icon">◫</div>
+            <span class="muted">Sản phẩm của tôi</span>
+            <div class="card-value" th:text="${myProductCount}">0</div>
+            <a class="text-link" th:href="@{/products}">Xem sản phẩm →</a>
+        </article>
+        <article class="card">
+            <div class="card-icon mint">⌑</div>
+            <span class="muted">Tổng sản phẩm hệ thống</span>
+            <div class="card-value" th:text="${productCount}">0</div>
+            <span class="pill">Đang hoạt động</span>
+        </article>
+        <article class="card">
+            <div class="card-icon peach">♧</div>
+            <span class="muted">Thành viên đã đăng ký</span>
+            <div class="card-value" th:text="${userCount}">0</div>
+            <a class="text-link" th:if="${admin}" th:href="@{/users}">Quản lý người dùng →</a>
+        </article>
+    </section>
+    <div class="toolbar">
+        <h2>Lối tắt</h2>
+    </div>
+    <section class="grid">
+        <article class="card">
+            <div class="card-icon">◈</div>
+            <h3>Danh sách sản phẩm</h3>
+            <p>Tìm kiếm, tạo mới, chỉnh sửa hoặc xóa sản phẩm của mình.</p>
+            <a class="btn btn-subtle" th:href="@{/products}">Đi đến sản phẩm ↗</a>
+        </article>
+        <article class="card" th:if="${admin}">
+            <div class="card-icon mint">♛</div>
+            <h3>Quản lý người dùng</h3>
+            <p>Phân quyền USER / ADMIN, cập nhật trạng thái và thống kê.</p>
+            <a class="btn btn-subtle" th:href="@{/users}">Quản lý người dùng ↗</a>
+        </article>
+        <article class="card">
+            <div class="card-icon peach">✦</div>
+            <h3>Hồ sơ của bạn</h3>
+            <p th:text="${currentUser.email}">email@example.com</p>
+            <span class="pill" th:text="${currentUser.roleName}">ROLE_USER</span>
+        </article>
+    </section>
+</main>
+</body>
+</html>

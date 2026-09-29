@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title layout:title-pattern="$CONTENT_TITLE • UTEShop">
+   UTEShop
+  </title>
+  <link rel="stylesheet" th:href="@{/css/app.css}"/>
+ </head>
+ <body>
+  <div th:replace="~{fragments/header :: header}">
+  </div>
+  <main class="container" layout:fragment="content">
+  </main>
+  <footer class="footer">
+   © 2026 UTEShop · Spring Boot 4 &amp; Spring Security 7
+  </footer>
+ </body>
+</html>
+

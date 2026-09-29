@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+ <head th:replace="~{layouts/base :: head('Trang chủ')}">
+ </head>
+ <body>
+  <div th:replace="~{fragments/header :: header}">
+  </div>
+  <main class="container">
+   <section class="hero">
+    <div>
+     <span class="eyebrow">
+      VÍ DỤ 01 · EMAIL LOGIN
+     </span>
+     <h1>
+      Mọi hành trình
+      <br/>
+      bắt đầu từ bảo mật.
+     </h1>
+     <p>
+      Đăng nhập qua email với Spring Security 7. Hiển thị tài khoản trong header, mã hóa BCrypt và phân quyền theo Role.
+     </p>
+     <a class="btn btn-white" th:href="@{/dashboard}">
+      Khám phá hệ thống ↗
+     </a>
+    </div>
+    <div class="hero-stats">
+     <div class="stat-glass">
+      <b>
+       01
+      </b>
+      <span>
+       Đăng nhập email
+      </span>
+     </div>
+     <div class="stat-glass">
+      <b>
+       100%
+      </b>
+      <span>
+       Bảo mật theo session
+      </span>
+     </div>
+    </div>
+   </section>
+   <div class="toolbar">
+    <h2>
+     Những gì đã hoàn thiện
+    </h2>
+   </div>
+   <section class="grid">
+    <article class="card">
+     <div class="card-icon">
+      ◎
+     </div>
+     <h3>
+      Xác thực qua email
+     </h3>
+     <p>
+      Spring Security tiếp nhận biểu mẫu đăng nhập và quản lý phiên.
+     </p>
+    </article>
+    <article class="card">
+     <div class="card-icon mint">
+      ◉
+     </div>
+     <h3>
+      Thông tin trên header
+     </h3>
+     <p>
+      Họ tên và email được chuyển đổi bằng MapStruct DTO.
+     </p>
+    </article>
+    <article class="card">
+     <div class="card-icon peach">
+      ◇
+     </div>
+     <h3>
+      Phân quyền cơ bản
+     </h3>
+     <p>
+      Role USER và ADMIN, trang quản trị chỉ dành cho ADMIN.
+     </p>
+    </article>
+   </section>
+  </main>
+  <footer class="footer">
+   © 2026 UTEShop · Spring Boot 4 &amp; Spring Security 7
+  </footer>
+ </body>
+</html>
+

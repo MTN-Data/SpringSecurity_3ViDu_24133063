@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/base}">
+<head>
+    <title>Biểu mẫu sản phẩm</title>
+</head>
+<body>
+<main layout:fragment="content" class="container">
+    <div class="page-heading" style="max-width:800px;margin:15px auto 30px;">
+        <div>
+            <span class="section-label">SẢN PHẨM / BIỂU MẪU</span>
+            <h1 th:text="${editing} ? 'Chỉnh sửa sản phẩm' : 'Tạo sản phẩm mới'">Sản phẩm</h1>
+            <p class="muted">Cập nhật hình ảnh, tên gọi, mô tả và giá sản phẩm.</p>
+        </div>
+        <a class="btn btn-outline" th:href="@{/products}">← Danh sách</a>
+    </div>
+    <div class="panel form-panel">
+        <form th:action="${editing} ? @{/products/edit/{id}(id=${productDTO.id})} : @{/products/create}"
+              th:object="${productDTO}" method="post" enctype="multipart/form-data">
+            <div class="alert alert-error" th:if="${#fields.hasGlobalErrors()}"
+                 th:each="item : ${#fields.globalErrors()}" th:text="${item}"></div>
+            <div class="form-grid">
+                <div class="form-group span-2">
+                    <label for="name">Tên sản phẩm</label>
+                    <input id="name" class="form-control" th:field="*{name}"
+                           placeholder="Ví dụ: Tai nghe Bluetooth" required>
+                    <small class="error-text" th:errors="*{name}"></small>
+                </div>
+                <div class="form-group span-2">
+                    <label for="description">Mô tả</label>
+                    <textarea id="description" class="form-control" th:field="*{description}"
+                              placeholder="Điểm nổi bật của sản phẩm..."></textarea>
+                </div>
+                <div class="form-group span-2">
+                    <label for="price">Giá bán (VNĐ)</label>
+                    <input id="price" class="form-control" th:field="*{price}"
+                           type="number" min="0" step="1000" placeholder="1290000" required>
+                    <small class="error-text" th:errors="*{price}"></small>
+                </div>
+                <div class="form-group span-2">
+                    <label for="image">Tải ảnh lên Cloudinary</label>
+                    <input id="image" class="form-control" type="file" name="image"
+                           accept="image/png,image/jpeg,image/webp">
+                    <small class="muted">Ảnh tối đa 5 MB. Cần cấu hình Cloudinary để sử dụng.</small>
+                </div>
+                <div class="form-group span-2">
+                    <label for="imageUrl">Hoặc sử dụng URL ảnh</label>
+                    <input id="imageUrl" class="form-control" th:field="*{imageUrl}"
+                           placeholder="https://res.cloudinary.com/...">
+                </div>
+            </div>
+            <button class="btn btn-primary" type="submit">Lưu sản phẩm ↗</button>
+            <a class="btn btn-outline" th:href="@{/products}">Hủy</a>
+        </form>
+    </div>
+</main>
+</body>
+</html>

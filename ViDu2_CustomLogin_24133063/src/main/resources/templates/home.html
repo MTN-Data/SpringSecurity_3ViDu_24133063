@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="vi" layout:decorate="~{layouts/base}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
+ <head>
+  <title>
+   Trang chủ
+  </title>
+ </head>
+ <body>
+  <main class="container" layout:fragment="content">
+   <section class="hero">
+    <div>
+     <span class="eyebrow">
+      VÍ DỤ 02 · CUSTOM LOGIN
+     </span>
+     <h1>
+      Đăng nhập linh hoạt.
+      <br/>
+      Trải nghiệm tinh tế.
+     </h1>
+     <p>
+      Đăng nhập bằng username hoặc email. Họ tên và ảnh đại diện được hiển thị tự động trên thanh điều hướng.
+     </p>
+     <a class="btn btn-white" th:href="@{/dashboard}">
+      Vào bảng điều khiển ↗
+     </a>
+    </div>
+    <div class="hero-stats">
+     <div class="stat-glass">
+      <b>
+       02
+      </b>
+      <span>
+       Phương thức đăng nhập
+      </span>
+     </div>
+     <div class="stat-glass">
+      <b>
+       01
+      </b>
+      <span>
+       Phiên bảo mật
+      </span>
+     </div>
+    </div>
+   </section>
+   <div class="toolbar">
+    <h2>
+     Khả năng nổi bật
+    </h2>
+   </div>
+   <div class="grid">
+    <article class="card">
+     <div class="card-icon">
+      ◎
+     </div>
+     <h3>
+      Username hoặc email
+     </h3>
+     <p>
+      Cùng một ô đăng nhập, được xử lý bởi CustomUserDetailsService.
+     </p>
+    </article>
+    <article class="card">
+     <div class="card-icon mint">
+      ◉
+     </div>
+     <h3>
+      Hồ sơ rõ ràng
+     </h3>
+     <p>
+      Hiển thị avatar, họ tên và email của người dùng ở header.
+     </p>
+    </article>
+    <article class="card">
+     <div class="card-icon peach">
+      ◇
+     </div>
+     <h3>
+      MapStruct &amp; Thymeleaf
+     </h3>
+     <p>
+      Chuyển đổi DTO và dùng Layout Dialect cho giao diện đồng nhất.
+     </p>
+    </article>
+   </div>
+  </main>
+ </body>
+</html>
+

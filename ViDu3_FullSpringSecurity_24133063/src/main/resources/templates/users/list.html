@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/base}">
+<head>
+    <title>Người dùng</title>
+</head>
+<body>
+<main layout:fragment="content" class="container">
+    <div class="page-heading">
+        <div>
+            <span class="section-label">ADMIN / QUẢN LÝ NGƯỜI DÙNG</span>
+            <h1>Danh sách thành viên</h1>
+            <p class="muted">Tổng cộng <strong th:text="${users.totalElements}">0</strong> tài khoản.</p>
+        </div>
+        <a class="btn btn-primary" th:href="@{/users/create}">+ Tạo người dùng</a>
+    </div>
+    <div class="alert alert-success" th:if="${success}" th:text="${success}"></div>
+    <div class="alert alert-error" th:if="${error}" th:text="${error}"></div>
+    <section class="data-panel">
+        <div class="panel-pad">
+            <form class="search-bar" th:action="@{/users}" method="get">
+                <input class="form-control" name="keyword" th:value="${keyword}"
+                       placeholder="Tìm theo username, email hoặc họ tên...">
+                <button class="btn btn-primary" type="submit">⌕ Tìm kiếm</button>
+                <a class="btn btn-outline" th:href="@{/users}">Xóa lọc</a>
+            </form>
+        </div>
+        <div class="table-scroll">
+            <table class="data-table">
+                <thead>
+                <tr>
+                    <th>Người dùng</th>
+                    <th>Username</th>
+                    <th>Vai trò</th>
+                    <th>Sản phẩm</th>
+                    <th>Trạng thái</th>
+                    <th>Thao tác</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="u : ${users.content}">
+                    <td>
+                        <div class="table-user">
+                            <img class="avatar" th:src="${u.images != null ? u.images : '/images/avatar-default.svg'}"
+                                 alt="Avatar">
+                            <div>
+                                <strong th:text="${u.fullName}">Nguyễn Văn A</strong><br>
+                                <small th:text="${u.email}">email@example.com</small>
+                            </div>
+                        </div>
+                    </td>
+                    <td th:text="${u.username}">username</td>
+                    <td>
+                        <span class="pill pill-admin" th:if="${u.roleName == 'ROLE_ADMIN'}">ADMIN</span>
+                        <span class="pill" th:unless="${u.roleName == 'ROLE_ADMIN'}">USER</span>
+                    </td>
+                    <td th:text="${u.productCount}">0</td>
+                    <td>
+                        <span class="pill" th:if="${u.enabled}">● Hoạt động</span>
+                        <span class="pill pill-muted" th:unless="${u.enabled}">○ Chưa kích hoạt</span>
+                    </td>
+                    <td>
+                        <a class="btn btn-subtle btn-sm" th:href="@{/users/edit/{id}(id=${u.id})}">Sửa</a>
+                        <form class="inline-form" th:action="@{/users/delete/{id}(id=${u.id})}"
+                              method="post" onsubmit="return confirm('Xóa tài khoản và tất cả sản phẩm của tài khoản này?');">
+                            <button class="btn btn-danger btn-sm" type="submit">Xóa</button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="empty-state" th:if="${users.empty}">
+                <div class="empty-illustration">⌕</div>
+                <h3>Không tìm thấy người dùng</h3>
+                <p>Thử một từ khóa khác.</p>
+            </div>
+        </div>
+        <nav class="pager" th:if="${users.totalPages > 1}">
+            <a th:if="${users.hasPrevious()}"
+               th:href="@{/users(keyword=${keyword},page=${users.number - 1})}">←</a>
+            <a th:each="i : ${#numbers.sequence(0, users.totalPages - 1)}"
+               th:href="@{/users(keyword=${keyword},page=${i})}"
+               th:classappend="${i == users.number} ? 'selected' : ''"
+               th:text="${i + 1}">1</a>
+            <a th:if="${users.hasNext()}"
+               th:href="@{/users(keyword=${keyword},page=${users.number + 1})}">→</a>
+        </nav>
+    </section>
+</main>
+</body>
+</html>

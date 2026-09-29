@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/base}">
+<head>
+    <title>Trang chủ</title>
+</head>
+<body>
+<main layout:fragment="content" class="container">
+    <section class="hero">
+        <div>
+            <span class="eyebrow">UTEShop · VÍ DỤ 03 / FULL SECURITY</span>
+            <h1>Quản lý thông minh.<br>Bảo mật vững chắc.</h1>
+            <p>Trọn bộ đăng ký OTP, đăng nhập phiên, phân quyền quản trị và quản lý sản phẩm. Tất cả trong một giao diện mới.</p>
+            <a class="btn btn-white" th:href="@{/dashboard}" th:if="${currentUser != null}">
+                Mở bảng điều khiển ↗
+            </a>
+            <a class="btn btn-white" th:href="@{/register}" th:if="${currentUser == null}">
+                Bắt đầu ngay ↗
+            </a>
+        </div>
+        <div class="hero-stats">
+            <div class="stat-glass">
+                <b th:text="${userCount}">0</b>
+                <span>Thành viên hệ thống</span>
+            </div>
+            <div class="stat-glass">
+                <b th:text="${productCount}">0</b>
+                <span>Sản phẩm đã đăng tải</span>
+            </div>
+            <div class="stat-glass" style="grid-column:span 2;">
+                <b style="font-size:23px;">Spring Boot 4 + Security 7</b>
+                <span>SQL Server · MapStruct · Cloudinary</span>
+            </div>
+        </div>
+    </section>
+
+    <div class="toolbar">
+        <div>
+            <span class="section-label">MỘT NỀN TẢNG · NHIỀU KHẢ NĂNG</span>
+            <h2>Đầy đủ cho bài thực hành</h2>
+        </div>
+    </div>
+    <section class="grid">
+        <article class="card">
+            <div class="card-icon">✉</div>
+            <h3>OTP qua email</h3>
+            <p>Kích hoạt tài khoản, gửi lại OTP và đặt lại mật khẩu với thời hạn xác thực.</p>
+        </article>
+        <article class="card">
+            <div class="card-icon mint">⌑</div>
+            <h3>Quản trị toàn diện</h3>
+            <p>Quản lý người dùng, sản phẩm, tìm kiếm, phân trang và thống kê.</p>
+        </article>
+        <article class="card">
+            <div class="card-icon peach">◈</div>
+            <h3>Phân quyền chặt chẽ</h3>
+            <p>USER chỉ sửa sản phẩm của mình; ADMIN được quản lý toàn bộ.</p>
+        </article>
+    </section>
+
+    <div class="toolbar">
+        <div>
+            <span class="section-label">KHÁM PHÁ</span>
+            <h2>Sản phẩm mới đăng</h2>
+        </div>
+        <a class="btn btn-outline" th:href="@{/products}">Xem tất cả ↗</a>
+    </div>
+    <section class="product-grid" th:if="${!#lists.isEmpty(recentProducts)}">
+        <article class="product" th:each="product : ${recentProducts}">
+            <div class="product-art">
+                <img th:if="${product.imageUrl != null and !#strings.isEmpty(product.imageUrl)}"
+                     th:src="${product.imageUrl}" alt="Ảnh sản phẩm">
+                <span class="empty-icon" th:unless="${product.imageUrl != null and !#strings.isEmpty(product.imageUrl)}">◇</span>
+            </div>
+            <div class="product-body">
+                <span class="pill">Sản phẩm mới</span>
+                <h3 style="margin-top:12px;" th:text="${product.name}">Sản phẩm</h3>
+                <p class="muted" th:text="${product.description}">Mô tả</p>
+                <div class="price" th:text="${#numbers.formatDecimal(product.price, 1, 'POINT', 0, 'COMMA')} + ' ₫'">0 ₫</div>
+                <small class="muted" th:text="'Bởi ' + ${product.username}">Bởi người dùng</small>
+            </div>
+        </article>
+    </section>
+    <div class="empty-state data-panel" th:if="${#lists.isEmpty(recentProducts)}">
+        <div class="empty-illustration">◇</div>
+        <h3>Chưa có sản phẩm</h3>
+        <p>Sản phẩm mới sẽ xuất hiện tại đây.</p>
+    </div>
+</main>
+</body>
+</html>

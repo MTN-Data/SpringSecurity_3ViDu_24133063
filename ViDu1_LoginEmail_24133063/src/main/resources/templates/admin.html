@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+ <head th:replace="~{layouts/base :: head('Quản trị')}">
+ </head>
+ <body>
+  <div th:replace="~{fragments/header :: header}">
+  </div>
+  <main class="container">
+   <span class="eyebrow">
+    ADMIN ONLY
+   </span>
+   <h1>
+    Trang quản trị
+   </h1>
+   <div class="card">
+    <h3>
+     Tổng tài khoản
+    </h3>
+    <div class="card-value" th:text="${userCount}">
+     0
+    </div>
+   </div>
+  </main>
+ </body>
+</html>
+

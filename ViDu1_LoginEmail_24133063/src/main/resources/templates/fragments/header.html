@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+ <body>
+  <header class="site-header" th:fragment="header">
+   <div class="nav-shell">
+    <a class="brand" th:href="@{/}">
+     <span class="brand-mark">
+      ✦
+     </span>
+     UTEShop
+    </a>
+    <nav class="main-nav">
+     <a th:href="@{/}">
+      Trang chủ
+     </a>
+    </nav>
+    <div class="account-area" th:if="${currentUser != null}">
+     <span class="avatar">
+      ★
+     </span>
+     <div class="account-meta">
+      <strong th:text="${currentUser.fullName}">
+       Nguyễn Văn A
+      </strong>
+      <small th:text="${currentUser.email}">
+       email@example.com
+      </small>
+     </div>
+     <form class="inline-form" method="post" th:action="@{/logout}">
+      <button class="btn btn-outline btn-sm" type="submit">
+       Đăng xuất
+      </button>
+     </form>
+    </div>
+    <a class="btn btn-primary btn-sm" th:href="@{/login}" th:if="${currentUser == null}">
+     Đăng nhập
+    </a>
+   </div>
+  </header>
+ </body>
+</html>
+

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/base}">
+<head><title>Đã có lỗi xảy ra</title></head>
+<body><main layout:fragment="content" class="container">
+    <div class="panel" style="max-width:650px;margin:80px auto;text-align:center;padding:70px 35px;">
+        <div style="font-size:65px;">⚠</div>
+        <h1>Không thể xử lý yêu cầu</h1>
+        <p class="muted" th:text="${message != null ? message : 'Vui lòng thử lại sau.'}">Đã có lỗi xảy ra.</p>
+        <a class="btn btn-primary" th:href="@{/dashboard}">Về trang chủ</a>
+    </div>
+</main></body></html>
